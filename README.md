@@ -1,2 +1,3 @@
-# ananay-sethi.github.io
-This is my personal website!
+# Ananay Sethi
+
+Welcome to my little corner of the internet!
