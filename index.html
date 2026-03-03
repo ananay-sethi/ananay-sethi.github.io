@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ananay Sethi — Astrophysicist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f7f4ee;
+      --cream-dark: #ede9df;
+      --olive-deep: #3b4a2f;
+      --olive-mid: #5a6e42;
+      --olive-light: #7d9160;
+      --olive-pale: #b8c9a3;
+      --olive-wash: #e8eedf;
+      --ink: #1e2318;
+      --ink-soft: #3d4535;
+      --muted: #8a9278;
+      --border: #c8d4b8;
+      --accent: #4e6535;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(247, 244, 238, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--olive-deep);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--olive-mid);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--olive-deep); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Large decorative circle */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      top: -100px; right: -150px;
+      opacity: 0.6;
+      animation: slowSpin 40s linear infinite;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 1px dashed var(--olive-pale);
+      top: 50px; right: -50px;
+      opacity: 0.5;
+      animation: slowSpin 60s linear infinite reverse;
+    }
+
+    @keyframes slowSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--olive-light);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.1s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--olive-deep);
+      margin-bottom: 0.3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.25s forwards;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--olive-mid);
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.55s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards;
+    }
+
+    .btn-primary {
+      padding: 0.75rem 2rem;
+      background: var(--olive-deep);
+      color: var(--cream);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--olive-deep);
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-primary:hover {
+      background: var(--olive-mid);
+      border-color: var(--olive-mid);
+    }
+
+    .btn-outline {
+      padding: 0.75rem 2rem;
+      background: transparent;
+      color: var(--olive-deep);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline:hover {
+      border-color: var(--olive-mid);
+      color: var(--olive-mid);
+    }
+
+    /* Hero visual side */
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 1.2s 0.5s forwards;
+    }
+
+    .hero-card {
+      background: var(--olive-wash);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px;
+      right: -8px; bottom: -8px;
+      border: 1px solid var(--olive-pale);
+      z-index: -1;
+    }
+
+    .card-photo-placeholder {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--olive-pale), var(--olive-light));
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: white;
+      font-weight: 300;
+    }
+
+    .card-affil {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--olive-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-position {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      padding: 0.25rem 0.7rem;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.2s forwards;
+    }
+
+    .scroll-hint span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--olive-pale), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ── SECTIONS COMMON ── */
+    section {
+      padding: 7rem 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--olive-pale);
+      letter-spacing: 0.1em;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--olive-deep);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin-left: 1rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--cream-dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.2rem;
+      max-width: 600px;
+    }
+
+    .about-text p strong {
+      font-weight: 500;
+      color: var(--olive-deep);
+    }
+
+    .about-sidebar {}
+
+    .sidebar-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .sidebar-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--olive-light);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-list {
+      list-style: none;
+    }
+
+    .sidebar-list li {
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .sidebar-list li::before {
+      content: '→';
+      color: var(--olive-pale);
+      font-size: 0.75rem;
+    }
+
+    /* ── RESEARCH ── */
+    #research { background: var(--cream); }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .research-card {
+      padding: 2rem;
+      background: var(--olive-wash);
+      border: 1px solid var(--border);
+      position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
+      overflow: hidden;
+    }
+
+    .research-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--olive-mid);
+    }
+
+    .research-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(59, 74, 47, 0.08);
+    }
+
+    .research-card-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--olive-pale);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+    }
+
+    .research-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--olive-deep);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .research-card p {
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── PUBLICATIONS ── */
+    #publications {
+      background: var(--cream-dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pub-list { display: flex; flex-direction: column; gap: 0; }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--olive-light);
+      letter-spacing: 0.06em;
+      padding-top: 0.2rem;
+    }
+
+    .pub-content h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--olive-deep);
+      margin-bottom: 0.3rem;
+      line-height: 1.35;
+    }
+
+    .pub-authors {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .pub-authors strong {
+      color: var(--olive-mid);
+      font-weight: 500;
+    }
+
+    .pub-journal {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--olive-light);
+      letter-spacing: 0.06em;
+    }
+
+    .pub-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.7rem;
+    }
+
+    .pub-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .pub-link:hover {
+      color: var(--olive-deep);
+      border-color: var(--olive-mid);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--cream); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--ink-soft);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .contact-link-row:hover {
+      background: var(--olive-wash);
+      border-color: var(--olive-pale);
+    }
+
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      background: var(--olive-deep);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-link-icon svg { width: 16px; height: 16px; fill: var(--cream); }
+
+    .contact-link-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
+    .contact-link-val {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    /* Contact map / decorative panel */
+    .contact-panel {
+      background: var(--olive-wash);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      position: relative;
+    }
+
+    .contact-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; right: -8px;
+      width: 100%; height: 100%;
+      border: 1px solid var(--olive-pale);
+      z-index: -1;
+    }
+
+    .panel-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--olive-deep);
+      margin-bottom: 1.5rem;
+    }
+
+    .panel-items { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .panel-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .panel-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--olive-mid);
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .panel-item-text {
+      font-size: 0.87rem;
+      color: var(--ink-soft);
+    }
+
+    .panel-item-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.07em;
+      margin-top: 0.15rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--olive-deep);
+      color: var(--olive-pale);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+    }
+
+    footer a {
+      color: var(--olive-pale);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--cream); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Intersection observer fade-in */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      #hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; }
+      .hero-visual { display: none; }
+      section { padding: 5rem 2rem; }
+      .about-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="#hero" class="nav-logo">Ananay Sethi</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-label">Graduate Researcher · Astrophysics</p>
+      <h1 class="hero-name">Ananay<br><em>Sethi</em></h1>
+      <p class="hero-tagline">Listening to the radio universe</p>
+      <p class="hero-desc">
+        I study massive protostellar jets using radio interferometry — 
+        tracing ionized outflows, mapping spectral indices, and probing 
+        the physics of shock acceleration in deeply embedded star-forming regions.
+      </p>
+      <div class="hero-ctas">
+        <a href="#research" class="btn-primary">View Research</a>
+        <a href="#publications" class="btn-outline">Publications</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="card-photo-placeholder">AS</div>
+        <p class="card-affil">Your University · Dept. of Astronomy</p>
+        <p class="card-position">PhD Candidate in Astrophysics</p>
+        <div class="card-tags">
+          <span class="tag">Radio Interferometry</span>
+          <span class="tag">VLA</span>
+          <span class="tag">CASA · AIPS</span>
+          <span class="tag">Thermal Jets</span>
+          <span class="tag">Spectral Index</span>
+          <span class="tag">Self-Calibration</span>
+          <span class="tag">Masers</span>
+          <span class="tag">IRAS 16562</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm a graduate student in astrophysics with a focus on the earliest stages of 
+          <strong>massive star formation</strong>. My work centers on understanding how 
+          protostellar jets interact with their surrounding environments — through radio 
+          continuum emission, maser activity, and molecular line tracers.
+        </p>
+        <p>
+          My primary target is <strong>IRAS 16562−3959</strong>, a luminous hot core 
+          driving a powerful ionized jet. I analyze multi-band VLA observations (S, C, X, Ku) 
+          to construct spectral index maps, model optical depth variations, and disentangle 
+          thermal bremsstrahlung from non-thermal synchrotron contributions.
+        </p>
+        <p>
+          I'm also interested in <strong>ammonia inversion transitions</strong> as probes 
+          of dense gas temperature and kinematics, and in radiative transfer modeling of 
+          hot core chemistry. On the technical side, I work extensively with CASA and AIPS, 
+          and enjoy modernizing legacy data reduction workflows in Python.
+        </p>
+      </div>
+
+      <div class="about-sidebar reveal">
+        <div class="sidebar-block">
+          <p class="sidebar-label">Instrumentation</p>
+          <ul class="sidebar-list">
+            <li>Karl G. Jansky VLA</li>
+            <li>ALMA (future work)</li>
+            <li>ATCA archival data</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Software</p>
+          <ul class="sidebar-list">
+            <li>CASA · AIPS</li>
+            <li>Python · Astropy</li>
+            <li>Matplotlib · NumPy</li>
+            <li>LaTeX · Overleaf</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Topics</p>
+          <ul class="sidebar-list">
+            <li>Radio continuum imaging</li>
+            <li>Self-calibration</li>
+            <li>Spectral index mapping</li>
+            <li>NH₃ spectroscopy</li>
+            <li>Maser emission</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESEARCH ── -->
+  <section id="research">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Research Themes</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="research-grid">
+      <div class="research-card reveal">
+        <p class="research-card-num">001</p>
+        <h3>Ionized Jets in Massive Protostars</h3>
+        <p>Multi-band radio continuum analysis of the IRAS 16562−3959 system, tracking free-free emission from the collimated jet and constraining mass-loss rates and ionization structure.</p>
+      </div>
+      <div class="research-card reveal">
+        <p class="research-card-num">002</p>
+        <h3>Spectral Index Mapping</h3>
+        <p>Band-to-band flux density comparisons across S, C, X, and Ku bands to map spectral index gradients — distinguishing optically thick and thin thermal regimes and identifying non-thermal components.</p>
+      </div>
+      <div class="research-card reveal">
+        <p class="research-card-num">003</p>
+        <h3>Shock Acceleration & Synchrotron Emission</h3>
+        <p>Investigating the role of internal working surfaces in protostellar jets as sites of particle acceleration, with a focus on the electron energy index (p ≈ 2.2) and its observational signatures.</p>
+      </div>
+      <div class="research-card reveal">
+        <p class="research-card-num">004</p>
+        <h3>Ammonia & Hot Core Chemistry</h3>
+        <p>Probing warm, dense gas in hot molecular cores through NH₃ inversion transitions. Connecting gas temperature structure to the protostellar luminosity and outflow feedback.</p>
+      </div>
+      <div class="research-card reveal">
+        <p class="research-card-num">005</p>
+        <h3>Maser Emission as Kinematic Tracers</h3>
+        <p>Using water and methanol maser spots to map the velocity field of the jet and disk system, anchoring the geometry of the outflow and constraining proper motion.</p>
+      </div>
+      <div class="research-card reveal">
+        <p class="research-card-num">006</p>
+        <h3>Self-Calibration Workflows</h3>
+        <p>Developing reproducible, high-dynamic-range imaging pipelines in CASA — iterating phase and amplitude self-calibration to recover faint extended emission in complex fields.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PUBLICATIONS ── -->
+  <section id="publications">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Publications</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="pub-list">
+      <div class="pub-item reveal">
+        <div class="pub-year">in prep.</div>
+        <div class="pub-content">
+          <h4>Multi-band Radio Continuum Analysis of the IRAS 16562−3959 Protostellar Jet</h4>
+          <p class="pub-authors"><strong>Sethi, A.</strong>, et al.</p>
+          <p class="pub-journal">The Astrophysical Journal · in preparation</p>
+          <div class="pub-links">
+            <a href="#" class="pub-link">arXiv (soon)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <h4>Your Previous Paper Title Goes Here — Update This Entry</h4>
+          <p class="pub-authors">Collaborator, X., <strong>Sethi, A.</strong>, &amp; Co-author, Y.</p>
+          <p class="pub-journal">Monthly Notices of the Royal Astronomical Society · Vol. XXX</p>
+          <div class="pub-links">
+            <a href="#" class="pub-link">arXiv</a>
+            <a href="#" class="pub-link">ADS</a>
+            <a href="#" class="pub-link">DOI</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="contact-layout">
+      <div>
+        <p class="contact-intro reveal">
+          Open to discussions on radio interferometry, protostellar jet physics, 
+          or collaborative science.
+        </p>
+
+        <div class="contact-links reveal">
+          <a href="mailto:ananay@example.edu" class="contact-link-row">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <div>
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-val">ananay@example.edu</span>
+            </div>
+          </a>
+
+          <a href="https://github.com/ananay-sethi" class="contact-link-row" target="_blank">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </div>
+            <div>
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-val">ananay-sethi</span>
+            </div>
+          </a>
+
+          <a href="https://orcid.org/0000-0000-0000-0000" class="contact-link-row" target="_blank">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c2.272 0 3.916-1.603 3.916-3.722s-1.644-3.722-3.916-3.722h-2.297z"/></svg>
+            </div>
+            <div>
+              <span class="contact-link-label">ORCID</span>
+              <span class="contact-link-val">0000-0000-0000-0000</span>
+            </div>
+          </a>
+
+          <a href="https://ui.adsabs.harvard.edu" class="contact-link-row" target="_blank">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div>
+              <span class="contact-link-label">NASA ADS</span>
+              <span class="contact-link-val">Publication record</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-panel reveal">
+        <p class="panel-heading">Currently based at</p>
+        <div class="panel-items">
+          <div class="panel-item">
+            <div class="panel-dot"></div>
+            <div>
+              <p class="panel-item-text">Your University</p>
+              <p class="panel-item-sub">Department of Astronomy / Physics</p>
+            </div>
+          </div>
+          <div class="panel-item">
+            <div class="panel-dot"></div>
+            <div>
+              <p class="panel-item-text">City, Country</p>
+              <p class="panel-item-sub">Your location</p>
+            </div>
+          </div>
+          <div class="panel-item">
+            <div class="panel-dot"></div>
+            <div>
+              <p class="panel-item-text">Advisor: Prof. Name</p>
+              <p class="panel-item-sub">Radio Astronomy Group</p>
+            </div>
+          </div>
+          <div class="panel-item">
+            <div class="panel-dot" style="background: var(--olive-pale);"></div>
+            <div>
+              <p class="panel-item-text" style="color: var(--muted);">Open to collaboration &amp; visitor discussions</p>
+              <p class="panel-item-sub">IAU · AAS member</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span>© 2025 Ananay Sethi · ananay-sethi.github.io</span>
+    <span>Built with care &amp; curiosity · <a href="mailto:ananay@example.edu">Get in touch</a></span>
+  </footer>
+
+  <script>
+    // Intersection observer for scroll reveals
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav active link highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.style.color = '');
+          const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (active) active.style.color = 'var(--olive-deep)';
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => sectionObserver.observe(s));
+  </script>
+</body>
+</html>
