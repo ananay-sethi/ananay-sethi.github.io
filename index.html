@@ -741,6 +741,110 @@
       .about-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; gap: 0.8rem; text-align: center; }
     }
+    /* ── PRESENTATIONS ── */
+    .presentations-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-top: 5rem;
+      margin-bottom: 2.5rem;
+    }
+    .presentations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .pres-card {
+      border: 1px solid var(--border);
+      background: var(--cream);
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+    }
+    .pres-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(59, 74, 47, 0.1);
+    }
+    .pres-thumb {
+      width: 100%;
+      height: 160px;
+      background: var(--olive-wash);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .pres-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.4s;
+    }
+    .pres-card:hover .pres-thumb img { transform: scale(1.04); }
+    .pres-thumb-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      height: 100%;
+    }
+    .pres-thumb-placeholder svg { width: 36px; height: 36px; fill: var(--olive-pale); }
+    .pres-thumb-placeholder span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--olive-pale);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .pres-type-badge {
+      position: absolute;
+      top: 0.75rem; left: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--olive-deep);
+      color: var(--cream);
+    }
+    .pres-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .pres-venue {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--olive-light);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+    .pres-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--olive-deep);
+      line-height: 1.35;
+      margin-bottom: 0.6rem;
+    }
+    .pres-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .pres-open {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+    }
   </style>
 </head>
 <body>
@@ -902,6 +1006,110 @@
       </div>
     </div>
   </section>
+
+  <!-- ── PRESENTATIONS ── -->
+  <div class="presentations-header reveal">
+    <span class="section-num">↳</span>
+    <h3 class="section-title" style="font-size: 1.8rem;">Posters &amp; Talks</h3>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="presentations-grid">
+
+    <!-- iPOSTER — AAS 245 (Jan 2025) -->
+    <a href="https://aas245-aas.ipostersessions.com/Default.aspx?s=68-BD-76-FE-01-50-8C-AB-29-0D-26-13-A6-6D-D1-02" target="_blank" class="pres-card reveal">
+      <div class="pres-thumb">
+        <div class="pres-thumb-placeholder">
+          <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z"/></svg>
+          <span>iPoster</span>
+        </div>
+        <span class="pres-type-badge">iPoster</span>
+      </div>
+      <div class="pres-body">
+        <p class="pres-venue">AAS 245 · Jan 2025</p>
+        <p class="pres-title">Cosmic Beacons: Mapping Ammonia Masers in the W51 Star-Forming Region</p>
+        <p class="pres-meta">2025 · National Harbor, MD</p>
+        <span class="pres-open">View iPoster →</span>
+      </div>
+    </a>
+
+    <!-- TALK — NRAO Summer (Aug 2024) -->
+    <a href="assets/talks/Summer_Presentation.pdf" target="_blank" class="pres-card reveal">
+      <div class="pres-thumb">
+        <img src="assets/talks/Summer_Presentation_thumb.png" alt="Talk Slides"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="pres-thumb-placeholder" style="display:none;">
+          <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z"/></svg>
+          <span>Talk Slides</span>
+        </div>
+        <span class="pres-type-badge" style="background: var(--olive-mid);">Talk</span>
+      </div>
+      <div class="pres-body">
+        <p class="pres-venue">NRAO Summer Research Program · Aug 2024</p>
+        <p class="pres-title">Cosmic Beacons: Mapping Ammonia Masers in the W51 Star-Forming Region</p>
+        <p class="pres-meta">21 August 2024 · Socorro, NM</p>
+        <span class="pres-open">Open Slides →</span>
+      </div>
+    </a>
+
+    <!-- POSTER — NM Symposium (2023) -->
+    <a href="assets/posters/NM_Symposium_Poster.pdf" target="_blank" class="pres-card reveal">
+      <div class="pres-thumb">
+        <img src="assets/posters/NM_Symposium_Poster_thumb.png" alt="NM Symposium Poster"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="pres-thumb-placeholder" style="display:none;">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+          <span>PDF Poster</span>
+        </div>
+        <span class="pres-type-badge">Poster</span>
+      </div>
+      <div class="pres-body">
+        <p class="pres-venue">40th Annual New Mexico Symposium</p>
+        <p class="pres-title">VLA Continuum and Molecular Line Observations of Jets from High-Mass Protostars</p>
+        <p class="pres-meta">2023 · Socorro, NM</p>
+        <span class="pres-open">Open PDF →</span>
+      </div>
+    </a>
+
+    <!-- iPOSTER — AAS 242 (Jun 2023) -->
+    <a href="https://aas242-aas.ipostersessions.com/Default.aspx?s=C1-9A-80-D4-41-A0-D1-CB-A5-B1-20-7D-AF-65-1D-5C" target="_blank" class="pres-card reveal">
+      <div class="pres-thumb">
+        <div class="pres-thumb-placeholder">
+          <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z"/></svg>
+          <span>iPoster</span>
+        </div>
+        <span class="pres-type-badge">iPoster</span>
+      </div>
+      <div class="pres-body">
+        <p class="pres-venue">AAS 242 · Jun 2023</p>
+        <p class="pres-title">VLA H₂O Maser Observations Towards High-Mass Protostellar Candidates</p>
+        <p class="pres-meta">2023 · Albuquerque, NM</p>
+        <span class="pres-open">View iPoster →</span>
+      </div>
+    </a>
+
+    <!-- POSTER — NMT SRS (2023) -->
+    <a href="assets/posters/SRS_2023_Poster_pptx.pdf" target="_blank" class="pres-card reveal">
+      <div class="pres-thumb">
+        <img src="assets/posters/SRS_2023_Poster_thumb.png" alt="SRS 2023 Poster"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="pres-thumb-placeholder" style="display:none;">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+          <span>PDF Poster</span>
+        </div>
+        <span class="pres-type-badge">Poster</span>
+      </div>
+      <div class="pres-body">
+        <p class="pres-venue">NMT Student Research Symposium · SRS 2023-035</p>
+        <p class="pres-title">VLA Water Maser Observations Toward High Mass Protostars</p>
+        <p class="pres-meta">2023 · Socorro, NM</p>
+        <span class="pres-open">Open PDF →</span>
+      </div>
+    </a>
+
+  </div>
+
+</section> <!-- closes #research -->
 
   <!-- ── PUBLICATIONS ── -->
 <section id="publications">
