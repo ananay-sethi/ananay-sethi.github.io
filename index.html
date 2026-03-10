@@ -1019,7 +1019,9 @@
     <!-- iPOSTER — AAS 245 (Jan 2025) -->
     <a href="https://aas245-aas.ipostersessions.com/Default.aspx?s=68-BD-76-FE-01-50-8C-AB-29-0D-26-13-A6-6D-D1-02" target="_blank" class="pres-card reveal">
       <div class="pres-thumb">
-        <div class="pres-thumb-placeholder">
+        <img src="assets/posters/AAS_245_thumb.png" alt="AAS 245 iPoster"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="pres-thumb-placeholder" style="display:none;">
           <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z"/></svg>
           <span>iPoster</span>
         </div>
@@ -1074,7 +1076,9 @@
     <!-- iPOSTER — AAS 242 (Jun 2023) -->
     <a href="https://aas242-aas.ipostersessions.com/Default.aspx?s=C1-9A-80-D4-41-A0-D1-CB-A5-B1-20-7D-AF-65-1D-5C" target="_blank" class="pres-card reveal">
       <div class="pres-thumb">
-        <div class="pres-thumb-placeholder">
+        <img src="assets/posters/AAS_242_thumb.png" alt="AAS 242 iPoster"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="pres-thumb-placeholder" style="display:none;">
           <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z"/></svg>
           <span>iPoster</span>
         </div>
@@ -1122,7 +1126,7 @@
   <div class="pub-list">
 
     <div class="pub-item reveal">
-      <div class="pub-year">2026</div>
+      <div class="pub-year">2025</div>
       <div class="pub-content">
         <h4>VLA Observations of the Ionized Jet IRAS 16562-3959</h4>
         <p class="pub-authors"><strong>Sethi, A.</strong>, Hofner, P., Momjian, E., Araya, E., Rodríguez, T., Montes, V., Kurtz, S., Ginsburg, A., &amp; Carrasco-González, C.</p>
@@ -1339,6 +1343,58 @@
     }, { threshold: 0.4 });
 
     sections.forEach(s => sectionObserver.observe(s));
+
+    // Auto-fetch publications from ORCID
+async function fetchORCIDPubs() {
+  const orcid = '0000-0002-9752-2125';
+  const container = document.querySelector('.pub-list');
+  
+  try {
+    const res = await fetch(`https://pub.orcid.org/v3.0/${orcid}/works`, {
+      headers: { 'Accept': 'application/json' }
+    });
+    const data = await res.json();
+    const works = data.group;
+
+    if (!works || works.length === 0) return;
+
+    // Clear existing static entries
+    container.innerHTML = '';
+
+    works.forEach(group => {
+      const work = group['work-summary'][0];
+      const title = work.title?.title?.value || 'Untitled';
+      const year = work['publication-date']?.year?.value || '—';
+      const journal = work['journal-title']?.value || '';
+      const url = work['external-ids']?.['external-id']
+        ?.find(id => id['external-id-type'] === 'doi');
+      const doiUrl = url ? `https://doi.org/${url['external-id-value']}` : null;
+
+      const item = document.createElement('div');
+      item.className = 'pub-item reveal';
+      item.innerHTML = `
+        <div class="pub-year">${year}</div>
+        <div class="pub-content">
+          <h4>${title}</h4>
+          ${journal ? `<p class="pub-journal">${journal}</p>` : ''}
+          <div class="pub-links">
+            ${doiUrl ? `<a href="${doiUrl}" class="pub-link" target="_blank">DOI</a>` : ''}
+            <a href="https://orcid.org/${orcid}" class="pub-link" target="_blank">ORCID</a>
+          </div>
+        </div>
+      `;
+      container.appendChild(item);
+    });
+
+    // Re-run reveal observer on new elements
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+
+  } catch (err) {
+    console.warn('ORCID fetch failed, keeping static entries.', err);
+  }
+}
+
+fetchORCIDPubs();
   </script>
 </body>
 </html>
