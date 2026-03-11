@@ -141,6 +141,13 @@
 
     .hero-text { position: relative; z-index: 1; }
 
+    #hero .hero-name,
+    #hero .hero-tagline,
+    #hero .hero-desc,
+    #hero .hero-label {
+      color: #e8f0e0;
+    }
+
     .hero-label {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
@@ -216,18 +223,18 @@
     .btn-outline {
       padding: 0.75rem 2rem;
       background: transparent;
-      color: var(--olive-deep);
+      color: #e8f0e0;
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       text-decoration: none;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(232, 240, 224, 0.5);
       transition: border-color 0.25s, color 0.25s;
     }
     .btn-outline:hover {
-      border-color: var(--olive-mid);
-      color: var(--olive-mid);
+      border-color: #e8f0e0;
+      color: #e8f0e0;
     }
 
     /* Hero visual side */
@@ -242,7 +249,7 @@
     }
 
     .hero-card {
-      background: var(--olive-wash);
+      background: #2e3a24;
       border: 1px solid var(--border);
       padding: 2.5rem;
       width: 100%;
@@ -863,7 +870,7 @@
   </nav>
 
   <!-- ── HERO ── -->
-  <section id="hero">
+  <section id="hero" style="background-image: url('assets/bg_pic.png'); background-size: cover; background-position: center;">
     <div class="hero-text">
       <p class="hero-label">Graduate Researcher · Radio Astrophysics</p>
       <h1 class="hero-name">Ananay<br><em>Sethi</em></h1>
@@ -875,24 +882,26 @@
       </p>
       <div class="hero-ctas">
         <a href="#research" class="btn-primary">View Research</a>
-        <a href="#publications" class="btn-outline">Publications</a>
+        <a href="#publications" class="btn-primary">Publications</a>
       </div>
     </div>
 
     <div class="hero-visual">
       <div class="hero-card">
-        <div class="card-photo-placeholder">AS</div>
-        <p class="card-affil">Your University · Dept. of Astronomy</p>
-        <p class="card-position">PhD Candidate in Astrophysics</p>
+        <img src="assets/profile_pic.jpg" alt="Ananay Sethi" style="width:150px; height:150px; border-radius:50%; object-fit:cover; margin-bottom:1.5rem;">
+        <p class="card-affil">New Mexico Tech · Dept. of Physics</p>
+        <p class="card-position" style="color: #e8f0e0;">Graduate Student in Astrophysics</p>
         <div class="card-tags">
           <span class="tag">Radio Interferometry</span>
           <span class="tag">VLA</span>
           <span class="tag">CASA · AIPS</span>
-          <span class="tag">Thermal Jets</span>
-          <span class="tag">Spectral Index</span>
-          <span class="tag">Self-Calibration</span>
+          <span class="tag">AI/ML</span>
+          <span class="tag">Ionized Jets</span>
+          <span class="tag">Star Formation</span>
+          <span class="tag">ISM</span>
           <span class="tag">Masers</span>
-          <span class="tag">IRAS 16562</span>
+          <span class="tag">HMYSOs</span>
+          <span class="tag">Protostars</span>
         </div>
       </div>
     </div>
